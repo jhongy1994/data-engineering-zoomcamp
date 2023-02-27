@@ -1,4 +1,4 @@
-From python:3.9
+FROM python:3.9
 
 RUN apt-get install wget
 RUN pip install pandas pandas sqlalchemy psycopg2 pyarrow fastparquet
