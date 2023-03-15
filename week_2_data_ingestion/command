@@ -1,0 +1,29 @@
+#set gcp-service-accounts-credentials file
+cd ~ && mkdir -p ~/.google/credentials/
+mv <path/to/your/service-account-authkeys>.json ~/.google/credentials/google_credentials.json
+
+#create directories necessary to run docker-compose for airflow
+mkdir airflow
+cd airflow && mkdir -p ~/.google/credentials/
+
+#set the Airflow user
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+
+#Import the official docker setup file from the latest Airflow version
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/stable/docker-compose.yaml'
+
+#Docker compose build
+docker-compose build
+
+#Initialize the Airflow scheduler, DB, and other config
+docker-compose up airflow-init
+# Kick up the all the services from the container:
+docker-compose up -d
+
+#check
+docker-compose ps
+
+#finish
+docker-compose down
+#finish and remove the volumes and images
+docker-compose down --volumes --rmi all

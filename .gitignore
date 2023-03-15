@@ -8,3 +8,5 @@ dzc-user-credentials.json
 #database volume
 week_1_basics_n_setup/ny_taxi_postgres_data/
 
+week_2_data_ingestion/airflow/.env
+week_2_data_ingestion/airflow/logs/
